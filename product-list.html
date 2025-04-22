@@ -3,50 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termékek listája - Termégs.cloud</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Termékek listája</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="product-list.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Termégs.cloud</div>
-            <ul>
-                <li><a href="index.html">Főoldal</a></li>
-                <li><a href="products.html">Termékek</a></li>
-                <li><a href="product-list.html" class="active">Termékek listája</a></li>
-                <li><a href="#" id="logout">Kijelentkezés</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="product-list-page">
+    <div class="product-list-page">
         <div class="product-list-container">
-            <h1>Termékek listája</h1>
-            
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Keresés név vagy cikkszám alapján...">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Termékek listája</h1>
+                <div class="action-buttons">
+                    <button class="btn btn-outline-primary me-2" id="gridViewBtn">
+                        <i class="bi bi-grid"></i>
+                    </button>
+                    <button class="btn btn-outline-primary me-2" id="listViewBtn">
+                        <i class="bi bi-list-ul"></i>
+                    </button>
+                    <a href="products.html" class="btn btn-primary">
+                        <i class="bi bi-plus-lg"></i> Új termék
+                    </a>
+                </div>
             </div>
 
+            <div class="search-container mb-4">
+                <input type="text" id="searchInput" class="form-control" placeholder="Keresés termékek között...">
+            </div>
+
+            <!-- Grid nézet -->
             <div class="products-grid" id="productsGrid">
-                <!-- A termékek ide kerülnek dinamikusan -->
+                <!-- A termékek kártyái ide kerülnek -->
+            </div>
+
+            <!-- Lista nézet -->
+            <div class="table-responsive" id="productsTable" style="display: none;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Kép</th>
+                            <th>Magyar név</th>
+                            <th>Cseh név</th>
+                            <th>Cikkszám</th>
+                            <th>Kiszerelés</th>
+                            <th>Címke</th>
+                            <th>Mennyiség</th>
+                            <th>Műveletek</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productTableBody">
+                        <!-- A termékek listája ide kerül -->
+                    </tbody>
+                </table>
             </div>
         </div>
-    </main>
+    </div>
 
     <script src="product-list.js"></script>
-    <script>
-        // Bejelentkezés ellenőrzése
-        if (!localStorage.getItem('isLoggedIn')) {
-            window.location.href = 'login.html';
-        }
-
-        // Kijelentkezés kezelése
-        document.getElementById('logout').addEventListener('click', (e) => {
-            e.preventDefault();
-            localStorage.removeItem('isLoggedIn');
-            window.location.href = 'login.html';
-        });
-    </script>
 </body>
 </html> 
