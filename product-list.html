@@ -34,7 +34,7 @@
             margin-bottom: 10px;
         }
 
-        .sidebar-nav a {
+        .sidebar-nav a, .logo a {
             color: #ecf0f1;
             text-decoration: none;
             padding: 10px 0;
@@ -42,7 +42,7 @@
             transition: all 0.3s ease;
         }
 
-        .sidebar-nav a:hover {
+        .sidebar-nav a:hover, .logo a:hover {
             background-color: #34495e;
             color: #fff;
         }
@@ -59,16 +59,27 @@
         .logo {
             color: #ecf0f1;
             text-align: center;
-            padding: 10px 0;
+            padding: 0;
             margin-bottom: 20px;
-            font-size: 1.2rem;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo a:hover img {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
     <div class="sidebar">
         <div class="logo">
-            <i class="bi bi-box-seam"></i>
+            <a href="index.html" title="Főoldal">
+                <img src="images/logo.png" alt="Termegs.cloud Logo">
+            </a>
         </div>
         <ul class="sidebar-nav">
             <li>
