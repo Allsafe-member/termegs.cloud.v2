@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés - Termégs.cloud</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Bejelentkezés</h1>
+            <form id="login-form">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email cím" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Jelszó" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Bejelentkezés</button>
+                </div>
+                <div id="error-message" class="error-message"></div>
+            </form>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html> 

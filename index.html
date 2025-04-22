@@ -15,6 +15,7 @@
                 <li><a href="#about">Rólunk</a></li>
                 <li><a href="#services">Szolgáltatások</a></li>
                 <li><a href="#contact">Kapcsolat</a></li>
+                <li><a href="#" id="logout">Kijelentkezés</a></li>
             </ul>
         </nav>
     </header>
@@ -63,6 +64,19 @@
         <p>&copy; 2024 Termégs.cloud. Minden jog fenntartva.</p>
     </footer>
 
+    <script>
+        // Bejelentkezés ellenőrzése
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        // Kijelentkezés kezelése
+        document.getElementById('logout').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html';
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html> 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termékek listája - Termégs.cloud</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="product-list.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Termégs.cloud</div>
+            <ul>
+                <li><a href="index.html">Főoldal</a></li>
+                <li><a href="products.html">Termékek</a></li>
+                <li><a href="product-list.html" class="active">Termékek listája</a></li>
+                <li><a href="#" id="logout">Kijelentkezés</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="product-list-page">
+        <div class="product-list-container">
+            <h1>Termékek listája</h1>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Keresés név vagy cikkszám alapján...">
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- A termékek ide kerülnek dinamikusan -->
+            </div>
+        </div>
+    </main>
+
+    <script src="product-list.js"></script>
+    <script>
+        // Bejelentkezés ellenőrzése
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        // Kijelentkezés kezelése
+        document.getElementById('logout').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html> 
