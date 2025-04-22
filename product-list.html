@@ -3,50 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termékek listája - Termégs.cloud</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="product-list.css">
+    <title>Termékek listája</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        .product-image {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: contain;
+        }
+        .table-responsive {
+            margin-top: 20px;
+        }
+        .action-buttons {
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Termégs.cloud</div>
-            <ul>
-                <li><a href="index.html">Főoldal</a></li>
-                <li><a href="products.html">Termékek</a></li>
-                <li><a href="product-list.html" class="active">Termékek listája</a></li>
-                <li><a href="#" id="logout">Kijelentkezés</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="product-list-page">
-        <div class="product-list-container">
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
             <h1>Termékek listája</h1>
-            
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Keresés név vagy cikkszám alapján...">
-            </div>
-
-            <div class="products-grid" id="productsGrid">
-                <!-- A termékek ide kerülnek dinamikusan -->
-            </div>
+            <a href="products.html" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Új termék
+            </a>
         </div>
-    </main>
+        
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Kép</th>
+                        <th>Magyar név</th>
+                        <th>Cseh név</th>
+                        <th>Cikkszám</th>
+                        <th>Kiszerelés</th>
+                        <th>Mennyiség</th>
+                        <th>Műveletek</th>
+                    </tr>
+                </thead>
+                <tbody id="productTableBody">
+                    <!-- A termékek ide kerülnek -->
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <script src="product-list.js"></script>
-    <script>
-        // Bejelentkezés ellenőrzése
-        if (!localStorage.getItem('isLoggedIn')) {
-            window.location.href = 'login.html';
-        }
-
-        // Kijelentkezés kezelése
-        document.getElementById('logout').addEventListener('click', (e) => {
-            e.preventDefault();
-            localStorage.removeItem('isLoggedIn');
-            window.location.href = 'login.html';
-        });
-    </script>
 </body>
 </html> 

@@ -3,85 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termékek - Termégs.cloud</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="products.css">
+    <title>Termék kezelése</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #imagePreview {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+            display: none;
+        }
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Termégs.cloud</div>
-            <ul>
-                <li><a href="index.html">Főoldal</a></li>
-                <li><a href="products.html" class="active">Termékek</a></li>
-                <li><a href="product-list.html">Termékek listája</a></li>
-                <li><a href="#" id="logout">Kijelentkezés</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="product-page">
-        <div class="product-form-container">
-            <h1>Új termék felvétele</h1>
-            <form id="product-form">
-                <div class="form-group">
-                    <label for="imageUrl">Kép URL</label>
-                    <input type="url" id="imageUrl" required>
-                    <div class="image-preview" id="imagePreview"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="hungarianName">Magyar név</label>
-                    <input type="text" id="hungarianName" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="czechName">Cseh név</label>
-                    <input type="text" id="czechName" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Termék leírás</label>
-                    <textarea id="description" rows="4" required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="articleNumber">Cikkszám</label>
-                    <input type="text" id="articleNumber" required>
-                </div>
-
-                <div class="form-group packaging-group">
-                    <label>Kiszerelés</label>
-                    <select id="packagingType">
-                        <option value="ml">ml</option>
-                        <option value="l">l</option>
-                        <option value="kapszula">kapszula</option>
-                    </select>
-                    <input type="number" id="packagingAmount" required>
-                    <div id="capsuleCount" style="display: none;">
-                        <label for="capsuleAmount">Kapszula mennyiség (db)</label>
-                        <input type="number" id="capsuleAmount">
-                    </div>
-                </div>
-
-                <button type="submit">Termék mentése</button>
-            </form>
-        </div>
-    </main>
-
+    <div class="container form-container">
+        <h1 id="pageTitle">Új termék létrehozása</h1>
+        <form id="productForm">
+            <div class="mb-3">
+                <label for="nameMagyar" class="form-label">Magyar név</label>
+                <input type="text" class="form-control" id="nameMagyar" required>
+            </div>
+            <div class="mb-3">
+                <label for="nameCzech" class="form-label">Cseh név</label>
+                <input type="text" class="form-control" id="nameCzech" required>
+            </div>
+            <div class="mb-3">
+                <label for="articleNumber" class="form-label">Cikkszám</label>
+                <input type="text" class="form-control" id="articleNumber" required>
+            </div>
+            <div class="mb-3">
+                <label for="packagingType" class="form-label">Kiszerelés típusa</label>
+                <select class="form-select" id="packagingType" required>
+                    <option value="">Válasszon...</option>
+                    <option value="capsule">Kapszula</option>
+                    <option value="liquid">Folyadék</option>
+                </select>
+            </div>
+            <div class="mb-3" id="capsuleCountContainer" style="display: none;">
+                <label for="capsuleCount" class="form-label">Kapszulák száma</label>
+                <input type="number" class="form-control" id="capsuleCount" min="1">
+            </div>
+            <div class="mb-3" id="liquidVolumeContainer" style="display: none;">
+                <label for="liquidVolume" class="form-label">Folyadék mennyisége (ml)</label>
+                <input type="number" class="form-control" id="liquidVolume" min="1">
+            </div>
+            <div class="mb-3">
+                <label for="imageInput" class="form-label">Termék képe</label>
+                <input type="file" class="form-control" id="imageInput" accept="image/*">
+                <img id="imagePreview" class="img-thumbnail" alt="Előnézet">
+            </div>
+            <div class="mb-3">
+                <a href="product-list.html" class="btn btn-secondary">Vissza a listához</a>
+                <button type="submit" class="btn btn-primary">Mentés</button>
+            </div>
+        </form>
+    </div>
     <script src="products.js"></script>
-    <script>
-        // Bejelentkezés ellenőrzése
-        if (!localStorage.getItem('isLoggedIn')) {
-            window.location.href = 'login.html';
-        }
-
-        // Kijelentkezés kezelése
-        document.getElementById('logout').addEventListener('click', (e) => {
-            e.preventDefault();
-            localStorage.removeItem('isLoggedIn');
-            window.location.href = 'login.html';
-        });
-    </script>
 </body>
 </html> 
