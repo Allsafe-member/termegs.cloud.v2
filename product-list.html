@@ -6,6 +6,7 @@
     <title>Termékek listája</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<<<<<<< HEAD
     <link rel="stylesheet" href="product-list.css">
 </head>
 <body>
@@ -56,6 +57,49 @@
                 </table>
             </div>
         </div>
+=======
+    <style>
+        .product-image {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: contain;
+        }
+        .table-responsive {
+            margin-top: 20px;
+        }
+        .action-buttons {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Termékek listája</h1>
+            <a href="products.html" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Új termék
+            </a>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Kép</th>
+                        <th>Magyar név</th>
+                        <th>Cseh név</th>
+                        <th>Cikkszám</th>
+                        <th>Kiszerelés</th>
+                        <th>Mennyiség</th>
+                        <th>Műveletek</th>
+                    </tr>
+                </thead>
+                <tbody id="productTableBody">
+                    <!-- A termékek ide kerülnek -->
+                </tbody>
+            </table>
+        </div>
+>>>>>>> 24192fbe205f4a275854eec7e9dfaef30fc121d3
     </div>
 
     <script src="product-list.js"></script>
