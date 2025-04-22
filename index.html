@@ -11,10 +11,9 @@
         <nav>
             <div class="logo">Termégs.cloud</div>
             <ul>
-                <li><a href="#home">Kezdőlap</a></li>
-                <li><a href="#about">Rólunk</a></li>
-                <li><a href="#services">Szolgáltatások</a></li>
-                <li><a href="#contact">Kapcsolat</a></li>
+                <li><a href="index.html" class="active">Főoldal</a></li>
+                <li><a href="products.html">Termékek</a></li>
+                <li><a href="product-list.html">Termékek listája</a></li>
                 <li><a href="#" id="logout">Kijelentkezés</a></li>
             </ul>
         </nav>
@@ -23,40 +22,23 @@
     <main>
         <section id="home" class="hero">
             <h1>Üdvözöljük a Termégs.cloud-on</h1>
-            <p>Modern megoldások a digitális világban</p>
+            <p>Termékkezelő rendszer</p>
         </section>
 
-        <section id="about" class="about">
-            <h2>Rólunk</h2>
-            <p>Bemutatkozó szöveg a cégről és a szolgáltatásokról.</p>
-        </section>
-
-        <section id="services" class="services">
-            <h2>Szolgáltatások</h2>
+        <section class="features">
+            <h2>Funkciók</h2>
             <div class="service-grid">
                 <div class="service-card">
-                    <h3>Webfejlesztés</h3>
-                    <p>Modern, reszponzív weboldalak készítése</p>
+                    <h3>Termék felvétele</h3>
+                    <p>Új termékek hozzáadása magyar és cseh névvel</p>
+                    <a href="products.html" class="button">Termék felvétele</a>
                 </div>
                 <div class="service-card">
-                    <h3>Felhőszolgáltatások</h3>
-                    <p>Felhő alapú megoldások és infrastruktúra</p>
-                </div>
-                <div class="service-card">
-                    <h3>Digitális Marketing</h3>
-                    <p>Online jelenlét és marketing stratégiák</p>
+                    <h3>Termékek kezelése</h3>
+                    <p>Termékek listázása és keresése</p>
+                    <a href="product-list.html" class="button">Termékek listája</a>
                 </div>
             </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <h2>Kapcsolat</h2>
-            <form id="contact-form">
-                <input type="text" placeholder="Név" required>
-                <input type="email" placeholder="Email" required>
-                <textarea placeholder="Üzenet" required></textarea>
-                <button type="submit">Küldés</button>
-            </form>
         </section>
     </main>
 
