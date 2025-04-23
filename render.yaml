@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: termegs-api
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node server.js
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://alexjakab23:slT9SVU9Kr9ZiWbg@termegscloud.rriw0qk.mongodb.net/termegs?retryWrites=true&w=majority
+      - key: PORT
+        value: 3000 
