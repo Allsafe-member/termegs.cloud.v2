@@ -1,6 +1,6 @@
 const API_BASE_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:3000'
-    : 'https://termegs-cloud-v2-1.onrender.com';
+    : 'https://api.termegs.cloud';
 
 let products = [];
 
