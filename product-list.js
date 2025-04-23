@@ -1,3 +1,7 @@
+const API_BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3000'
+    : 'https://termegs-cloud-v2-1.onrender.com';
+
 let products = [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -47,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function loadProducts() {
     try {
         console.log('Termékek betöltése...');
-        const response = await fetch('http://localhost:3000/products');
+        const response = await fetch(`${API_BASE_URL}/products`);
         console.log('Szerver válasz:', response);
         
         if (!response.ok) {
@@ -199,7 +203,7 @@ async function deleteProduct(id) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/products/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/products/${id}`, {
             method: 'DELETE'
         });
 

@@ -1,6 +1,6 @@
 const API_BASE_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:3000'
-    : 'https://termegscloudv2.netlify.app/api';
+    : 'https://termegs-cloud-v2-1.onrender.com';
 
 let editingProductId = null;
 let currentImage = null;
@@ -69,6 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
             label: document.getElementById("label").value
         };
 
+        console.log("Form adatok:", formData);
+
         if (packagingType.value === "capsule") {
             formData.capsuleCount = parseInt(document.getElementById("capsuleCount").value) || 0;
         } else if (packagingType.value === "bottle") {
@@ -91,9 +93,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
+            console.log("Küldés előtt - formData:", JSON.stringify(formData));
+            
             const url = editingProductId 
                 ? `${API_BASE_URL}/products/${editingProductId}`
                 : `${API_BASE_URL}/products`;
+            
+            console.log("Küldés URL:", url);
 
             const response = await fetch(url, {
                 method: editingProductId ? "PUT" : "POST",
@@ -103,15 +109,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: JSON.stringify(formData)
             });
 
+            console.log("Válasz státusz:", response.status);
+            
             if (!response.ok) {
                 const errorData = await response.text();
+                console.error("Szerver hiba:", errorData);
                 throw new Error(`Hiba történt a mentés során: ${errorData}`);
             }
 
-            await response.json();
+            const responseData = await response.json();
+            console.log("Sikeres mentés:", responseData);
+            
             window.location.href = "product-list.html";
         } catch (error) {
-            console.error("Hiba:", error);
+            console.error("Hiba részletek:", error);
             alert(error.message);
         }
     });
