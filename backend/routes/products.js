@@ -4,7 +4,10 @@ let Product = require('../models/product');
 // Összes termék lekérése
 router.route('/').get(async (req, res) => {
     try {
-        const products = await Product.find();
+        const limit = req.query.limit ? parseInt(req.query.limit) : 0;
+        const products = await Product.find()
+            .sort({ createdAt: -1 }) // Legújabbak először
+            .limit(limit);
         res.json(products);
     } catch (err) {
         console.error('Hiba a termékek lekérésénél:', err);
@@ -21,11 +24,12 @@ router.route('/').post(async (req, res) => {
             hungarianName: req.body.hungarianName,
             czechName: req.body.czechName,
             articleNumber: req.body.articleNumber,
+            description: req.body.description,
             packaging: req.body.packaging,
-            label: req.body.label,
             capsuleCount: req.body.capsuleCount,
             liquidVolume: req.body.liquidVolume,
-            image: req.body.image
+            image: req.body.image,
+            weight: req.body.weight
         });
 
         console.log('Létrehozott termék objektum:', newProduct);
@@ -33,7 +37,7 @@ router.route('/').post(async (req, res) => {
         const savedProduct = await newProduct.save();
         console.log('Mentett termék:', savedProduct);
         
-        res.json({ message: 'Termék sikeresen hozzáadva!', product: savedProduct });
+        res.json(savedProduct);
     } catch (err) {
         console.error('Hiba a termék mentésénél:', err);
         res.status(400).json('Hiba: ' + err.message);
@@ -79,14 +83,15 @@ router.route('/:id').put(async (req, res) => {
         product.hungarianName = req.body.hungarianName;
         product.czechName = req.body.czechName;
         product.articleNumber = req.body.articleNumber;
+        product.description = req.body.description;
         product.packaging = req.body.packaging;
-        product.label = req.body.label;
         product.capsuleCount = req.body.capsuleCount;
         product.liquidVolume = req.body.liquidVolume;
         product.image = req.body.image;
+        product.weight = req.body.weight;
 
         const updatedProduct = await product.save();
-        res.json({ message: 'Termék frissítve!', product: updatedProduct });
+        res.json(updatedProduct);
     } catch (err) {
         console.error('Hiba a termék frissítésénél:', err);
         res.status(400).json('Hiba: ' + err.message);

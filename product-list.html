@@ -78,9 +78,6 @@
 <body>
     <div class="sidebar">
         <div class="logo">
-            <a href="index.html" title="Főoldal">
-                <img src="images/logo.png" alt="Főoldal">
-            </a>
         </div>
         <ul class="sidebar-nav">
             <li>
@@ -111,7 +108,7 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1>Termékek listája</h1>
                 <div class="action-buttons">
-                    <button class="btn btn-outline-primary me-2" id="gridViewBtn">
+                    <button class="btn btn-outline-primary me-2 active" id="gridViewBtn">
                         <i class="bi bi-grid"></i>
                     </button>
                     <button class="btn btn-outline-primary me-2" id="listViewBtn">
@@ -128,22 +125,17 @@
             </div>
 
             <!-- Grid nézet -->
-            <div class="products-grid" id="productsGrid">
-                <!-- A termékek kártyái ide kerülnek -->
-            </div>
+            <div id="productsGrid"></div>
 
             <!-- Lista nézet -->
             <div class="table-responsive" id="productsTable" style="display: none;">
-                <table class="table table-striped">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Kép</th>
-                            <th>Magyar név</th>
-                            <th>Cseh név</th>
+                            <th>Név</th>
                             <th>Cikkszám</th>
                             <th>Kiszerelés</th>
-                            <th>Címke</th>
-                            <th>Mennyiség</th>
                             <th>Műveletek</th>
                         </tr>
                     </thead>
@@ -151,6 +143,28 @@
                         <!-- A termékek listája ide kerül -->
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal overlay -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <!-- Product modal -->
+    <div class="product-modal" id="productModal">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <p id="modalCzechName" class="czech-name"></p>
+                <p id="modalArticleNumber" class="article-number"></p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info-row">
+                    <div id="modalPackaging" class="modal-packaging"></div>
+                    <div id="modalWeight" class="modal-weight"></div>
+                </div>
+                <div id="modalDescription" class="modal-description"></div>
             </div>
         </div>
     </div>

@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bejelentkezés - Termégs.cloud</title>
+    <title>Regisztráció - Termégs.cloud</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="login.css">
 </head>
 <body class="login-page">
     <div class="login-container">
         <div class="login-box">
-            <h1>Bejelentkezés</h1>
-            <form id="login-form">
+            <h1>Regisztráció</h1>
+            <form id="register-form">
+                <div class="form-group">
+                    <input type="text" id="fullName" placeholder="Teljes név" required>
+                </div>
                 <div class="form-group">
                     <input type="email" id="email" placeholder="Email cím" required>
                 </div>
@@ -19,15 +22,19 @@
                     <input type="password" id="password" placeholder="Jelszó" required>
                 </div>
                 <div class="form-group">
-                    <button type="submit">Bejelentkezés</button>
+                    <input type="password" id="confirmPassword" placeholder="Jelszó megerősítése" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Regisztráció</button>
                 </div>
                 <div class="form-group text-center">
-                    <a href="register.html">Még nincs fiókja? Regisztráljon!</a>
+                    <a href="login.html">Már van fiókja? Jelentkezzen be!</a>
                 </div>
                 <div id="error-message" class="error-message"></div>
+                <div id="success-message" class="success-message"></div>
             </form>
         </div>
     </div>
-    <script src="login.js"></script>
+    <script src="register.js"></script>
 </body>
 </html> 

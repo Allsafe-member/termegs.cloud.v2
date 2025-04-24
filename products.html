@@ -53,6 +53,8 @@
         .main-content {
             margin-left: 60px;
             padding: 20px;
+            height: 100vh;
+            overflow: hidden;
         }
 
         .logo {
@@ -64,25 +66,112 @@
         }
 
         #imagePreview {
-            max-width: 200px;
-            max-height: 200px;
-            margin-top: 10px;
             display: none;
         }
         
         .form-container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            height: calc(100vh - 40px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 30px;
+        }
+
+        .form-column {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .recent-products {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .recent-products h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: #495057;
+        }
+
+        .recent-products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            height: 270px;
+        }
+
+        .recent-products .card {
+            border: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-bottom: 0;
+            height: 100%;
+        }
+
+        .recent-products .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .recent-products .card-body {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .recent-products .card-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+
+        .recent-products .badge {
+            padding: 0.5rem 0.75rem;
+            font-weight: normal;
+        }
+
+        .recent-products .badge i {
+            margin-right: 4px;
+        }
+
+        .recent-products .timestamps {
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .recent-products .timestamps i {
+            margin-right: 4px;
+        }
+
+        .recent-product-info {
+            display: inline-block;
+            margin-right: 20px;
+            padding: 8px 12px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #495057;
+        }
+
+        .timestamp {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
     <div class="sidebar">
         <div class="logo">
-            <a href="index.html" title="Főoldal">
-                <img src="images/logo.png" alt="Főoldal">
-            </a>
         </div>
         <ul class="sidebar-nav">
             <li>
@@ -112,46 +201,64 @@
         <div class="form-container">
             <h1 id="pageTitle">Új termék létrehozása</h1>
             <form id="productForm">
-                <div class="mb-3">
-                    <label for="nameMagyar" class="form-label">Magyar név</label>
-                    <input type="text" class="form-control" id="nameMagyar" required>
-                </div>
-                <div class="mb-3">
-                    <label for="nameCzech" class="form-label">Cseh név</label>
-                    <input type="text" class="form-control" id="nameCzech" required>
-                </div>
-                <div class="mb-3">
-                    <label for="articleNumber" class="form-label">Cikkszám</label>
-                    <input type="text" class="form-control" id="articleNumber" required>
-                </div>
-                <div class="mb-3">
-                    <label for="packagingType" class="form-label">Kiszerelés típusa</label>
-                    <select class="form-select" id="packagingType" required>
-                        <option value="">Válasszon...</option>
-                        <option value="capsule">Kapszula</option>
-                        <option value="bottle">Üveg</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="label" class="form-label">Címke</label>
-                    <input type="text" class="form-control" id="label">
-                </div>
-                <div class="mb-3" id="capsuleCountContainer" style="display: none;">
-                    <label for="capsuleCount" class="form-label">Kapszulák száma</label>
-                    <input type="number" class="form-control" id="capsuleCount" min="1">
-                </div>
-                <div class="mb-3" id="liquidVolumeContainer" style="display: none;">
-                    <label for="liquidVolume" class="form-label">Folyadék mennyisége (ml)</label>
-                    <input type="number" class="form-control" id="liquidVolume" min="1">
-                </div>
-                <div class="mb-3">
-                    <label for="imageInput" class="form-label">Termék képe/fájlja</label>
-                    <input type="text" class="form-control mb-2" id="imageUrl" placeholder="Fájl URL">
-                    <input type="file" class="form-control" id="imageInput">
-                    <img id="imagePreview" class="img-thumbnail" alt="Előnézet">
-                </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Mentés</button>
+                <div class="form-row">
+                    <div class="form-column">
+                        <div class="mb-3">
+                            <label for="nameMagyar" class="form-label">Magyar név</label>
+                            <input type="text" class="form-control" id="nameMagyar" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nameCzech" class="form-label">Cseh név</label>
+                            <input type="text" class="form-control" id="nameCzech" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="articleNumber" class="form-label">Cikkszám</label>
+                            <input type="text" class="form-control" id="articleNumber" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Termék leírás</label>
+                            <textarea class="form-control" id="description" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="imageUrl" class="form-label">Kép URL</label>
+                            <input type="text" class="form-control" id="imageUrl">
+                        </div>
+                        <div class="mb-3">
+                            <label for="weight" class="form-label">Tömeg (g)</label>
+                            <input type="number" class="form-control" id="weight" min="0" step="0.1">
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="mb-3">
+                            <label for="packagingType" class="form-label">Kiszerelés</label>
+                            <select class="form-select" id="packagingType" required>
+                                <option value="">Válasszon...</option>
+                                <option value="capsule">Kapszula</option>
+                                <option value="liquid">Folyadék</option>
+                            </select>
+                        </div>
+                        <div class="mb-3" id="capsuleCountContainer" style="display: none;">
+                            <label for="capsuleCount" class="form-label">Kapszulák száma (db)</label>
+                            <input type="number" class="form-control" id="capsuleCount" min="1">
+                        </div>
+                        <div class="mb-3" id="liquidVolumeContainer" style="display: none;">
+                            <label for="liquidVolume" class="form-label">Folyadék mennyisége (ml)</label>
+                            <input type="number" class="form-control" id="liquidVolume" min="1">
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary">Mentés</button>
+                        </div>
+                        <div class="mb-3">
+                            <div id="createdAt" class="text-muted small"></div>
+                            <div id="updatedAt" class="text-muted small"></div>
+                        </div>
+                        <div class="recent-products">
+                            <h3>Legutóbb felvett termékek</h3>
+                            <div id="recentProducts">
+                                <!-- Itt jelennek meg a legutóbbi termékek -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

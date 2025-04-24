@@ -1,53 +1,55 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
 require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const authRoutes = require('./routes/auth');
+const productRoutes = require('./routes/products');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
-// Middleware
-app.use(cors({
-    origin: ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://192.168.1.144:8080'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-}));
-
-// Request logging middleware
-app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-    next();
-});
-
+// Body parsing middleware FIRST
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// MongoDB Atlas kapcsolat
-const MONGODB_URI = 'mongodb+srv://alexjakab23:slT9SVU9Kr9ZiWbg@termegscloud.rriw0qk.mongodb.net/termegs?retryWrites=true&w=majority';
+// CORS middleware SECOND
+app.use(cors({
+    origin: ['http://localhost:8080', 'https://termegs.cloud', 'http://termegs.cloud'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true
+}));
 
-mongoose.connect(MONGODB_URI, {
-    retryWrites: true,
-    w: 'majority'
-})
-.then(() => console.log('MongoDB Atlas kapcsolat létrejött'))
-.catch(err => console.error('MongoDB kapcsolódási hiba:', err));
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error('Hiba történt:', err);
-    res.status(500).json({ error: err.message });
+// Request logging middleware THIRD
+app.use((req, res, next) => {
+    console.log('--------------------');
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    console.log('Headers:', req.headers);
+    console.log('Body:', req.body);
+    console.log('--------------------');
+    next();
 });
 
+// MongoDB kapcsolat
+mongoose.connect('mongodb://localhost:27017/termegs_cloud')
+    .then(() => console.log('MongoDB kapcsolódva'))
+    .catch(err => console.error('MongoDB kapcsolódási hiba:', err));
+
 // Routes
-const productsRouter = require('./routes/products');
-app.use('/products', productsRouter);
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
 
 // Alap útvonal teszteléshez
 app.get('/', (req, res) => {
     res.json({ message: 'A szerver működik' });
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Szerver hiba:', err);
+    res.status(500).json({ message: 'Belső szerver hiba történt' });
+});
+
 app.listen(port, () => {
-    console.log(`A szerver fut a következő porton: ${port}`);
+    console.log(`Szerver fut a ${port} porton - http://localhost:${port}`);
 }); 
