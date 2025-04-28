@@ -1,3 +1,7 @@
+const API_BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3000'
+    : 'https://api.termegs.cloud';
+
 document.addEventListener('DOMContentLoaded', () => {
     // Ellenőrizzük, hogy be van-e jelentkezve
     if (isLoggedIn()) {
@@ -51,7 +55,7 @@ function isLoggedIn() {
 async function checkCredentials(email, password) {
     try {
         console.log('Kérés küldése a szervernek...');
-        const response = await fetch('http://localhost:3000/api/auth/login', {
+        const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
